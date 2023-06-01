@@ -28,6 +28,7 @@ import {
   responsiveScreenWidth,
   responsiveScreenFontSize,
 } from 'react-native-responsive-dimensions';
+import LottieView from 'lottie-react-native';
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
 const COLORS = {
@@ -45,23 +46,47 @@ const COLORS = {
   blue_bg: '#E8EFF1',
   shadow: '#1b2e5e',
 };
-export default function Loading() {
+export default function Loading_2() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   return (
     <View style={styles.modalContainer}>
       <StatusBar backgroundColor="transparent" />
       <View style={styles.modal_lodaing_style}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
-        <Text
+        {/* <ActivityIndicator size="large" color={COLORS.primary} /> */}
+
+        <View
           style={{
-            fontFamily: 'Inter',
-            marginLeft: 10,
-            color: COLORS.coklat,
-            fontSize: 14,
+            height: '50%',
+            width: '100%',
+            alignItems: 'center',
+            // backgroundColor: 'pink',
           }}>
-          Di Tunggu Lur...
-        </Text>
+          <LottieView
+            source={require('../../assets/Path/18024-blue-loader.json')}
+            autoPlay
+            loop
+            // style={{backgroundColor: 'pink'}}
+          />
+        </View>
+        <View
+          style={{
+            height: '30%',
+            width: '100%',
+            // justifyContent: 'center',
+            alignItems: 'center',
+            // backgroundColor: 'grey',
+          }}>
+          <Text
+            style={{
+              fontFamily: 'Inter',
+              marginLeft: 10,
+              color: COLORS.coklat,
+              fontSize: 12,
+            }}>
+            Sedang Memuat ...
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -69,16 +94,16 @@ export default function Loading() {
 
 const styles = StyleSheet.create({
   modal_lodaing_style: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 60,
-    width: responsiveScreenWidth(60),
+    height: 100,
+    width: responsiveScreenWidth(50),
     marginHorizontal: responsiveScreenWidth(20),
     top: responsiveScreenHeight(42),
     backgroundColor: 'white',
-    borderRadius: 3,
+    borderRadius: 10,
     borderColor: '#ddd',
     borderBottomWidth: 0,
     shadowColor: '#000000',

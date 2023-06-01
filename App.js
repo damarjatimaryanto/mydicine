@@ -29,6 +29,7 @@ import AlarmDetail from './pages/AlarmDetail';
 import MyDicine from './pages/component/Header';
 import BackHome from './pages/component/BackHome';
 import Loading from './pages/component/Loading';
+import Loading_2 from './pages/component/Loading_2';
 
 const Tab = createBottomTabNavigator();
 const width = Dimensions.get('screen').width;
@@ -169,6 +170,16 @@ function App() {
         <Tab.Screen
           name="Loading"
           component={Loading}
+          options={{
+            headerShown: false,
+            tabBarStyle: {display: 'none'},
+            tabBarButton: () => null,
+          }}
+        />
+
+        <Tab.Screen
+          name="Loading_2"
+          component={Loading_2}
           options={{
             headerShown: false,
             tabBarStyle: {display: 'none'},

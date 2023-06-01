@@ -29,6 +29,7 @@ import {
   responsiveScreenWidth,
   responsiveScreenFontSize,
 } from 'react-native-responsive-dimensions';
+import Loading_2 from './component/Loading_2';
 const WIDTH = Dimensions.get('screen').width;
 const HEIGHT = Dimensions.get('screen').height;
 const COLORS = {
@@ -131,7 +132,7 @@ const TambahAlarm = () => {
             Alert.alert('Modal has been closed.');
             setModal(false);
           }}>
-          <Loading />
+          <Loading_2 />
         </Modal>
       )}
 

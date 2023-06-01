@@ -20,6 +20,8 @@ import React, {useRef, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Loading from './component/Loading';
+import Loading_2 from './component/Loading_2';
+import LottieView from 'lottie-react-native';
 
 import {
   responsiveHeight,
@@ -35,6 +37,10 @@ const Login = () => {
   const navigation = useNavigation();
   const [isSecureEntry, setIsSecureEntry] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
+  const toggleLoadingModal = () => {
+    setLoadingVisible(!loadingVisible);
+  };
 
   const Login = () => {
     setLoading(true);
@@ -57,7 +63,7 @@ const Login = () => {
               Alert.alert('Modal has been closed.');
               setModal(false);
             }}>
-            <Loading />
+            <Loading_2 />
           </Modal>
         )}
         <ImageBackground
@@ -131,7 +137,10 @@ const Login = () => {
                 </TouchableOpacity>
               </View>
 
-              <TouchableOpacity onPress={Login} style={styles.btn_mulai}>
+              <TouchableOpacity
+                // onPress={toggleLoadingModal}
+                onPress={Login}
+                style={styles.btn_mulai}>
                 <Text style={styles.text_mulai}>MASUK</Text>
               </TouchableOpacity>
             </View>
@@ -279,5 +288,12 @@ const styles = StyleSheet.create({
     width: 20,
     height: 18,
     marginLeft: 5,
+  },
+  modalContainer: {
+    height: HEIGHT,
+    width: WIDTH,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
