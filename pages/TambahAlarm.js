@@ -21,6 +21,9 @@ import React, {useRef, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Loading from './component/Loading';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {SelectList} from 'react-native-dropdown-select-list';
+import {MultipleSelectList} from 'react-native-dropdown-select-list';
+
 import {
   responsiveHeight,
   responsiveWidth,
@@ -47,6 +50,7 @@ const COLORS = {
   blue_bg: '#E8EFF1',
   shadow: '#1b2e5e',
 };
+
 const TambahAlarm = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
@@ -58,6 +62,27 @@ const TambahAlarm = () => {
   const [pressedLima, setPressedLima] = useState(false);
   const [pressedEnam, setPressedEnam] = useState(false);
   const [pressedTujuh, setPressedTujuh] = useState(false);
+  const [selected, setSelected] = useState('');
+
+  const data = [
+    {key: '1', value: 'Penicilin'},
+    {key: '2', value: 'Paracetamol'},
+    {key: '3', value: 'Bodrex'},
+    {key: '4', value: 'Panadol', disabled: true},
+    {key: '5', value: 'Oskadon Pancen Oye'},
+    {key: '6', value: 'Mixagrip'},
+    {key: '7', value: 'Vitamin C'},
+    {key: '8', value: 'Paramex'},
+    {key: '9', value: 'Dopamin'},
+    {key: '10', value: 'Morfin'},
+    {key: '11', value: 'Sirup Marjan', disabled: true},
+    {key: '12', value: 'Pil Koplo'},
+    {key: '13', value: 'Red Drum'},
+    {key: '14', value: 'Vitamin D'},
+  ];
+
+  const [selectedTeam, setSelectedTeam] = useState({});
+  const [selectedTeams, setSelectedTeams] = useState([]);
 
   const onReset = () => {
     setPressedSatu(false);
@@ -84,8 +109,13 @@ const TambahAlarm = () => {
   const [jam, setJam] = useState('00 : 00');
   const [hours, setHours] = useState();
   const [minutes, setMinutes] = useState();
+  const [obat, setObat] = useState();
 
   const [currentDate, setCurrentDate] = useState('');
+
+  const getData = () => {
+    var obat = selected + ',';
+  };
 
   useEffect(() => {
     var date = new Date().getDate(); //Current Date
@@ -145,7 +175,7 @@ const TambahAlarm = () => {
             style={{
               fontFamily: 'Inter-ExtraBold',
               color: COLORS.primary,
-              fontSize: 54,
+              fontSize: 50,
             }}>
             {jam}
             {/* {currentDate} */}
@@ -153,7 +183,7 @@ const TambahAlarm = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.mid_container}>
-        <View>
+        {/* <View>
           <Text
             style={{
               marginHorizontal: responsiveScreenWidth(3),
@@ -162,8 +192,36 @@ const TambahAlarm = () => {
             }}>
             Daftar Obat :
           </Text>
+        </View> */}
+
+        <View
+          style={{
+            width: responsiveScreenWidth(90),
+            marginHorizontal: responsiveScreenWidth(5),
+          }}>
+          <MultipleSelectList
+            setSelected={val => setSelected(val)}
+            data={data}
+            save="value"
+            maxHeight={responsiveScreenHeight(45)}
+            onSelect={() => console.log(selected)}
+            fontFamily="Inter-Regular"
+            notFoundText="Data Tidak Ditemukan"
+            boxStyles={{backgroundColor: COLORS.blue_bg, borderWidth: 0}}
+            dropdownTextStyles={{color: COLORS.primary}}
+            searchPlaceholder="Pencarian Obat"
+            badgeStyles={{backgroundColor: COLORS.primary}}
+            placeholder="Cari obat disini"
+            label="Daftar Obat :"
+            labelStyles={{fontFamily: 'Inter-Medium', color: COLORS.primary}}
+            checkBoxStyles={{backgroundColor: COLORS.blue_bg}}
+            inputStyles={{color: 'black'}}
+          />
         </View>
-        <View style={styles.box_container}>
+
+        <Text>{selected + ','}</Text>
+
+        {/* <View style={styles.box_container}>
           <View style={styles.box2}>
             <View style={styles.list_container}>
               <TouchableOpacity
@@ -290,9 +348,9 @@ const TambahAlarm = () => {
               <Text style={styles.obat_style}>Apixaban</Text>
             </View>
           </View>
-        </View>
+        </View> */}
 
-        <TouchableOpacity style={styles.logout_container} onPress={onReset}>
+        {/* <TouchableOpacity style={styles.logout_container} onPress={onReset}>
           <Image
             style={{
               // backgroundColor: 'grey',
@@ -304,7 +362,7 @@ const TambahAlarm = () => {
             source={require('./../assets/images/icons/icon_trash.png')}
           />
           <Text style={styles.logout_style}>RESET OBAT</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity onPress={TambahAlarm} style={styles.btn_mulai}>
           <Text style={styles.text_mulai}>Tambah Alarm</Text>
@@ -339,14 +397,14 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   top_container: {
-    flex: 0.25,
+    flex: 0.3,
     // backgroundColor: 'pink',
     width: WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
   },
   mid_container: {
-    flex: 0.75,
+    flex: 0.7,
     // backgroundColor: 'green',
     width: WIDTH,
   },

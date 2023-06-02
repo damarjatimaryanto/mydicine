@@ -16,6 +16,7 @@ import {
 import React, {useRef, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import SplashScreen from './SplashScreen';
+import LottieView from 'lottie-react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -144,9 +145,20 @@ const styles = StyleSheet.create({
 
     shadowColor: COLORS.shadow,
     shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.08,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 0.4,
     elevation: 5,
+
+    // shadowColor: 'black',
+
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 4,
+    // },
+    // shadowOpacity: 0.3,
+    // shadowRadius: 0.4,
+
+    // elevation: 3,
   },
   box_top: {
     height: '60%',
